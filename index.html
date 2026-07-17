@@ -4,61 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrator Hub — The Crankshaft Classic Car Club</title>
-
+ 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+ 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+ 
     <link rel="stylesheet" href="./style.css">
     <script src="index.js" defer></script>
 </head>
 <body>
-
-
+ 
+<!-- Background video: fixed behind everything, single wrapper, no nesting -->
 <div class="video-bg">
-    <video autoplay muted loop playsinline poster="assets/fallback-image.jpg">
+    <video autoplay muted loop playsinline poster="./photos/fallback-image.jpg">
         <source src="./photos/classic.mp4" type="video/mp4">
     </video>
 </div>
-
+ 
 <div class="container py-5">
-
+ 
     <header class="text-center mb-5">
         <p class="eyebrow mb-2">Members &amp; Officers Only</p>
         <h1 class="display-font display-4 mb-1">The Crankshaft Classic Car Club</h1>
-        <p class="subtitle mb-0">Member Hub &middot; Est. 2026
+        <p class="subtitle mb-0">Administrator Hub &middot; Est. 1962</p>
+        <!-- CHUNK 7 writes here -->
+        <p class="env-banner mt-2" id="envBanner"></p>
     </header>
-
+ 
     <div class="row g-4 align-items-stretch mb-4">
         <div class="col-md-6">
             <div class="panel p-4 h-100">
-                <h2 class="display-font h3 mb-3">Member Hub</h2>
-                <p>Welcome to the Member Hub! Join the club roster, event calendar, show registrations, and the vehicle registry from one place.</p>
+                <h2 class="display-font h3 mb-3">Administrator Hub</h2>
+                <p>Welcome to the Administrator Hub! Manage the club roster, event calendar, show registrations, and the vehicle registry from one place.</p>
                 <p class="mb-0">Not an administrator? <a href="userlogin.html" class="link-leather">Click here</a> to go to the member login.</p>
             </div>
         </div>
+ 
         <div class="col-md-6">
             <div class="panel p-4 h-100">
-                <h2 class="display-font h3 mb-1">Create an account</h2>
-                <p class="subtitle mb-4">Please create an account to continue.</p>
-                <div class="mb-3">
-                    <label for="adminUsername" class="form-label">Create Username</label>
-                    <input type="text" class="form-control dark-input" id="adminUsername" placeholder="Enter your username">
-                </div>
-                <div class="mb-4">
-                    <label for="adminPassword" class="form-label">Create Password</label>
-                    <input type="password" class="form-control dark-input" id="adminPassword" placeholder="Create a strong password">
-                </div>
-                <button type="button" class="btn btn-leather px-4">Log in</button>
+                <h2 class="display-font h3 mb-1">Login</h2>
+                <p class="subtitle mb-4">Please enter your credentials to log in.</p>
+ 
+                <!-- HTML attribute validation: required, minlength, pattern -->
+                <form id="loginForm" novalidate>
+                    <div class="mb-3">
+                        <label for="adminUsername" class="form-label">Admin username</label>
+                        <input type="text" class="form-control dark-input" id="adminUsername"
+                               name="adminUsername" placeholder="Enter your username"
+                               required minlength="4" maxlength="20"
+                               pattern="[A-Za-z0-9_]+" autocomplete="username">
+                    </div>
+ 
+                    <div class="mb-4">
+                        <label for="adminPassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control dark-input" id="adminPassword"
+                                   name="adminPassword" placeholder="Enter your password"
+                                   required minlength="8" autocomplete="current-password">
+                            <button class="btn btn-outline-chrome" type="button"
+                                    id="togglePassword" aria-pressed="false">Show</button>
+                        </div>
+                    </div>
+ 
+                    <button type="submit" class="btn btn-leather px-4">Log in</button>
+                    <!-- CHUNK 2 writes here -->
+                    <div class="status-msg mt-3" id="loginStatus" role="status" aria-live="polite"></div>
+                </form>
             </div>
         </div>
     </div>
-
+ 
     <div class="row g-4 mb-5">
         <div class="col-md-6">
             <div class="photo-frame">
@@ -71,53 +91,97 @@
             </div>
         </div>
     </div>
-
+ 
     <footer class="pt-5 pb-3">
         <p class="eyebrow mb-4">Club Directory</p>
+ 
+        <!-- CHUNK 5: add-member form -->
+        <div class="panel p-4 mb-4">
+            <form id="addMemberForm" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label for="newFirstName" class="form-label">First name</label>
+                    <input type="text" class="form-control dark-input" id="newFirstName"
+                           name="newFirstName" placeholder="First" required maxlength="30">
+                </div>
+                <div class="col-md-3">
+                    <label for="newLastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control dark-input" id="newLastName"
+                           name="newLastName" placeholder="Last" required maxlength="30">
+                </div>
+                <div class="col-md-3">
+                    <label for="newGroup" class="form-label">Group</label>
+                    <select class="form-select dark-input" id="newGroup" name="newGroup">
+                        <option value="admin">Administrators</option>
+                        <option value="board">Board Members</option>
+                        <option value="officer">Club Officers</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-leather w-100">Add member</button>
+                </div>
+            </form>
+        </div>
+ 
+        <!-- CHUNK 4: search filter -->
+        <div class="mb-4">
+            <label for="directorySearch" class="form-label">Search the directory</label>
+            <input type="search" class="form-control dark-input" id="directorySearch"
+                   name="directorySearch" placeholder="Type a name…" maxlength="40">
+            <div class="status-msg mt-2" id="searchStatus" role="status" aria-live="polite"></div>
+        </div>
+ 
         <div class="row g-4">
-
+ 
             <div class="col-md-4">
                 <div class="section-label rounded px-3 py-2 mb-3">Administrators</div>
                 <table class="table table-bordered table-dark-custom">
                     <thead>
                         <tr><th>Firstname</th><th>Lastname</th></tr>
                     </thead>
-                    <tbody>
+                    <tbody id="adminBody">
                         <tr><td>Mary</td><td>Moe</td></tr>
                         <tr><td>John</td><td>Doe</td></tr>
                     </tbody>
                 </table>
             </div>
-
+ 
             <div class="col-md-4">
                 <div class="section-label rounded px-3 py-2 mb-3">Board Members</div>
                 <table class="table table-hover table-dark-custom">
                     <thead>
                         <tr><th>Firstname</th><th>Lastname</th></tr>
                     </thead>
-                    <tbody>
+                    <tbody id="boardBody">
                         <tr><td>Mary</td><td>Moe</td></tr>
                         <tr><td>John</td><td>Doe</td></tr>
                     </tbody>
                 </table>
             </div>
-
+ 
             <div class="col-md-4">
                 <div class="section-label rounded px-3 py-2 mb-3">Club Officers</div>
                 <table class="table table-sm table-dark-custom">
                     <thead>
                         <tr><th>Firstname</th><th>Lastname</th></tr>
                     </thead>
-                    <tbody>
+                    <tbody id="officerBody">
                         <tr><td>Mary</td><td>Moe</td></tr>
                         <tr><td>John</td><td>Doe</td></tr>
                     </tbody>
                 </table>
             </div>
-
+ 
         </div>
     </footer>
-
+ 
 </div>
+ 
+<template id="memberRowTemplate">
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</template>
+ 
 </body>
 </html>
