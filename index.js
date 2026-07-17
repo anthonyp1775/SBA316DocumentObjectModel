@@ -85,3 +85,18 @@ if (loginForm) {
   loginForm.addEventListener("input", handleLoginInput);
 }
 
+function handleTogglePassword() {
+  const isHidden = passwordInput.getAttribute("type") === "password";
+
+  passwordInput.setAttribute("type", isHidden ? "text" : "password");
+  toggleBtn.setAttribute("aria-pressed", String(isHidden));
+
+  toggleBtn.textContent = isHidden ? "Hide" : "Show";
+  toggleBtn.classList.toggle("btn-active", isHidden);
+
+  passwordInput.style.letterSpacing = isHidden ? "normal" : "0.15em";
+}
+
+if (toggleBtn) {
+  toggleBtn.addEventListener("click", handleTogglePassword);
+}
