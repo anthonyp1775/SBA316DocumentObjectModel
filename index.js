@@ -56,7 +56,7 @@ function handleLoginSubmit(event) {
   }
  
   if (problems.length > 0) {
-    // innerHTML requirement — building a list from the collected problems
+  
     loginStatus.innerHTML =
       "<strong>Could not sign in:</strong><ul><li>" +
       problems.join("</li><li>") +
