@@ -1,5 +1,3 @@
-/* The Crankshaft Classic Car Club — Administrator Hub */
-
 :root {
     --racing-green: #16301f;
     --panel-green: #1f3d2a;
@@ -10,46 +8,45 @@
     --leather: #c6893f;
     --leather-soft: #e2b878;
 }
-
+ 
 html {
     background-color: var(--racing-green);
 }
-
+ 
 .video-bg {
     position: fixed;
     inset: 0;
     z-index: -1;
     overflow: hidden;
 }
-
+ 
 .video-bg video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+ 
 
-/* Scrim: sits above the video but still behind the content, so the
-   headings stay readable over a busy shot. */
 .video-bg::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(rgba(22, 48, 31, 0.75), rgba(22, 48, 31, 0.9));
 }
-
+ 
 body {
     background-color: transparent;
     color: var(--cream);
     font-family: "Jost", system-ui, sans-serif;
 }
-
+ 
 .display-font {
     font-family: "Racing Sans One", sans-serif;
     letter-spacing: 0.02em;
 }
-
+ 
 .subtitle { color: var(--cream-dim); }
-
+ 
 .eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
@@ -57,8 +54,7 @@ body {
     text-transform: uppercase;
     color: var(--leather-soft);
 }
-
-/* Panels — slightly translucent so the video reads through them */
+ 
 .panel {
     background-color: rgba(31, 61, 42, 0.82);
     backdrop-filter: blur(6px);
@@ -67,15 +63,13 @@ body {
     /* twin "pinstripe" top trim, like coachline striping on a fender */
     border-top: 4px double var(--leather);
 }
-
-/* Links */
+ 
 a.link-leather {
     color: var(--leather-soft);
     text-decoration-color: rgba(198, 137, 63, 0.5);
 }
 a.link-leather:hover { color: var(--cream); }
-
-/* Form */
+ 
 .form-control.dark-input {
     background-color: var(--field-green);
     border: 1px solid rgba(211, 215, 212, 0.35);
@@ -88,7 +82,7 @@ a.link-leather:hover { color: var(--cream); }
     border-color: var(--leather);
     box-shadow: 0 0 0 0.2rem rgba(198, 137, 63, 0.25);
 }
-
+ 
 .btn-leather {
     background-color: var(--leather);
     color: var(--racing-green);
@@ -96,8 +90,7 @@ a.link-leather:hover { color: var(--cream); }
     letter-spacing: 0.05em;
 }
 .btn-leather:hover { background-color: var(--leather-soft); color: var(--racing-green); }
-
-/* Photos */
+ 
 .photo-frame img {
     border-radius: 0.75rem;
     border: 3px solid var(--chrome);
@@ -105,8 +98,8 @@ a.link-leather:hover { color: var(--cream); }
     height: 320px;
     object-fit: cover;
 }
+ 
 
-/* Directory */
 .section-label {
     background-color: rgba(198, 137, 63, 0.12);
     border: 1px solid rgba(198, 137, 63, 0.45);
@@ -116,7 +109,7 @@ a.link-leather:hover { color: var(--cream); }
     text-transform: uppercase;
     font-size: 0.8rem;
 }
-
+ 
 .table-dark-custom {
     --bs-table-bg: transparent;
     color: var(--cream);
@@ -133,10 +126,49 @@ a.link-leather:hover { color: var(--cream); }
     background-color: rgba(198, 137, 63, 0.1);
     color: var(--cream);
 }
-
+ 
 footer { border-top: 1px solid rgba(211, 215, 212, 0.25); }
+ 
 
-/* Respect users who've asked their OS to cut down on motion */
 @media (prefers-reduced-motion: reduce) {
     .video-bg video { display: none; }
+}
+ 
+
+.env-banner {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--cream-dim);
+}
+ 
+.status-msg {
+    font-size: 0.875rem;
+    min-height: 1.25rem;
+}
+.status-ok    { color: var(--leather-soft); }
+.status-error { color: #f0a3a3; }
+.status-msg ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+ 
+.btn-outline-chrome {
+    border: 1px solid rgba(211, 215, 212, 0.35);
+    color: var(--cream);
+}
+.btn-outline-chrome:hover,
+.btn-outline-chrome.btn-active {
+    background-color: var(--leather);
+    border-color: var(--leather);
+    color: var(--racing-green);
+}
+ 
+.form-control.is-invalid { border-color: #f0a3a3; }
+ 
+select.dark-input option { background-color: var(--field-green); color: var(--cream); }
+ 
+
+.row-new td  { animation: rowFadeIn 400ms ease-out; }
+.row-match td { background-color: rgba(198, 137, 63, 0.14); }
+ 
+@keyframes rowFadeIn {
+    from { background-color: rgba(198, 137, 63, 0.45); }
+    to   { background-color: transparent; }
 }

@@ -19,7 +19,7 @@
 </head>
 <body>
  
-<!-- Background video: fixed behind everything, single wrapper, no nesting -->
+
 <div class="video-bg">
     <video autoplay muted loop playsinline poster="./photos/fallback-image.jpg">
         <source src="./photos/classic.mp4" type="video/mp4">
@@ -32,7 +32,7 @@
         <p class="eyebrow mb-2">Members &amp; Officers Only</p>
         <h1 class="display-font display-4 mb-1">The Crankshaft Classic Car Club</h1>
         <p class="subtitle mb-0">Administrator Hub &middot; Est. 1962</p>
-        <!-- CHUNK 7 writes here -->
+        
         <p class="env-banner mt-2" id="envBanner"></p>
     </header>
  
@@ -50,7 +50,7 @@
                 <h2 class="display-font h3 mb-1">Login</h2>
                 <p class="subtitle mb-4">Please enter your credentials to log in.</p>
  
-                <!-- HTML attribute validation: required, minlength, pattern -->
+                
                 <form id="loginForm" novalidate>
                     <div class="mb-3">
                         <label for="adminUsername" class="form-label">Admin username</label>
@@ -72,7 +72,7 @@
                     </div>
  
                     <button type="submit" class="btn btn-leather px-4">Log in</button>
-                    <!-- CHUNK 2 writes here -->
+                    
                     <div class="status-msg mt-3" id="loginStatus" role="status" aria-live="polite"></div>
                 </form>
             </div>
@@ -95,7 +95,7 @@
     <footer class="pt-5 pb-3">
         <p class="eyebrow mb-4">Club Directory</p>
  
-        <!-- CHUNK 5: add-member form -->
+        
         <div class="panel p-4 mb-4">
             <form id="addMemberForm" class="row g-3 align-items-end">
                 <div class="col-md-3">
@@ -122,7 +122,6 @@
             </form>
         </div>
  
-        <!-- CHUNK 4: search filter -->
         <div class="mb-4">
             <label for="directorySearch" class="form-label">Search the directory</label>
             <input type="search" class="form-control dark-input" id="directorySearch"
@@ -134,7 +133,7 @@
  
             <div class="col-md-4">
                 <div class="section-label rounded px-3 py-2 mb-3">Administrators</div>
-                <table class="table table-bordered table-dark-custom">
+                <table class="table table-sm table-dark-custom">
                     <thead>
                         <tr><th>Firstname</th><th>Lastname</th></tr>
                     </thead>
@@ -147,7 +146,7 @@
  
             <div class="col-md-4">
                 <div class="section-label rounded px-3 py-2 mb-3">Board Members</div>
-                <table class="table table-hover table-dark-custom">
+                <table class="table table-sm table-dark-custom">
                     <thead>
                         <tr><th>Firstname</th><th>Lastname</th></tr>
                     </thead>
