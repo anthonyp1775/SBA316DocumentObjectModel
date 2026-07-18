@@ -100,3 +100,45 @@ function handleTogglePassword() {
 if (toggleBtn) {
   toggleBtn.addEventListener("click", handleTogglePassword);
 }
+
+allDirBodies.forEach(function (body) {
+    const rows = body.querySelectorAll("tr");
+ 
+    rows.forEach(function (row) {
+        const firstCell = row.firstElementChild;
+      const lastCell  = firstCell.nextElementSibling;
+      const fullName  = (firstCell.textContent + " " + lastCell.textContent).toLowerCase();
+ 
+      const hit = term === "" || fullName.indexOf(term) !== -1;
+      row.style.display = hit ? "" : "none";
+      row.classList.toggle("row-match", hit && term !== "");
+      if (hit) matches++;
+    });
+  });
+ 
+  if (term === "") {
+    setStatus(searchStatus, "", null);
+  } else {
+    setStatus(searchStatus, matches + " member(s) matched \u201C" + term + "\u201D.", "ok");
+  }
+}
+ 
+if (searchInput) {
+  searchInput.addEventListener("input", handleDirectorySearch);
+}
+
+function buildMemberRow(first, last) {
+
+  const row       = document.createElement("tr");
+  const firstCell = document.createElement("td");
+  const lastCell  = document.createElement("td");
+ 
+  firstCell.textContent = first;
+  lastCell.textContent  = last;
+
+  row.appendChild(firstCell);
+  row.appendChild(lastCell);
+  row.classList.add("row-new");
+
+    return row;
+}
