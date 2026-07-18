@@ -142,3 +142,28 @@ function buildMemberRow(first, last) {
 
     return row;
 }
+
+function handleAddMember(event) {
+  event.preventDefault();
+ 
+  const first = newFirstName.value.trim();
+  const last  = newLastName.value.trim();
+ 
+  if (first === "" || last === "") {
+    setStatus(searchStatus, "Both first and last name are required.", "error");
+    return;
+  }
+ 
+  const row  = buildMemberRow(first, last);
+  const body = getBodyForGroup(newGroup.value);
+
+  body.prepend(row);
+ 
+  setStatus(searchStatus, first + " " + last + " added to the directory.", "ok");
+  addMemberForm.reset();
+  newFirstName.focus();
+}
+ 
+if (addMemberForm) {
+  addMemberForm.addEventListener("submit", handleAddMember);
+}
