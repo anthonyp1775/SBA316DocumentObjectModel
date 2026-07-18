@@ -101,9 +101,15 @@ if (toggleBtn) {
   toggleBtn.addEventListener("click", handleTogglePassword);
 }
 
+function handleDirectorySearch(event) {
+  const term = searchInput.value.trim().toLowerCase();
+  let matches = 0;
+
 allDirBodies.forEach(function (body) {
     const rows = body.querySelectorAll("tr");
  
+
+    
     rows.forEach(function (row) {
         const firstCell = row.firstElementChild;
       const lastCell  = firstCell.nextElementSibling;
@@ -167,3 +173,57 @@ function handleAddMember(event) {
 if (addMemberForm) {
   addMemberForm.addEventListener("submit", handleAddMember);
 }
+
+const FOUNDING_MEMBERS = [
+  { first: "Ada",    last: "Vance",   group: "board" },
+  { first: "Rex",    last: "Calloway", group: "board" },
+  { first: "Nadia",  last: "Okonjo",  group: "officer" },
+  { first: "Sal",    last: "Moreno",  group: "officer" }
+];
+
+function renderRoster(members) {
+  const fragments = {
+    admin:   document.createDocumentFragment(),
+    board:   document.createDocumentFragment(),
+    officer: document.createDocumentFragment()
+  };
+
+
+
+    members.forEach(function (member) {
+    const clone = rowTemplate.content.cloneNode(true);
+    const cells = clone.querySelectorAll("td");
+ 
+    cells[0].textContent = member.first;
+    cells[1].textContent = member.last;
+ 
+    fragments[member.group].appendChild(clone);
+  });
+
+  adminBody.appendChild(fragments.admin);
+  boardBody.appendChild(fragments.board);
+  officerBody.appendChild(fragments.officer);
+}
+ 
+if (rowTemplate) {
+  renderRoster(FOUNDING_MEMBERS);
+}
+
+function describeEnvironment() {
+    const screenSize = window.screen.width + "\u00D7" + window.screen.height;
+    const online = window.navigator.onLine ? "online" : "offline";
+    const layout = window.innerWidth < 768 ? "compact" : "full";
+    return "Session: " + layout + " layout \u00B7 " + screenSize + " display \u00B7 " + online;
+}
+
+function handleResize() {
+      envBanner.innerText = describeEnvironment();
+}
+      if (envBanner) {
+  handleResize();
+    let resizeTimer = null;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(handleResize, 150);
+  });
+      }
